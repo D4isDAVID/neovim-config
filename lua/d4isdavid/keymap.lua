@@ -19,4 +19,3 @@ M.xnoremap = bind('x')
 M.inoremap = bind('i')
 
 return M
-
