@@ -4,5 +4,4 @@ require('presence'):setup {
   show_time = false,
   editing_text = 'Editing %s',
   file_explorer_text = 'Browsing %s',
-  log_level = 'debug',
 }
