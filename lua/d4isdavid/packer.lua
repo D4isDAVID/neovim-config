@@ -19,4 +19,6 @@ return require('packer').startup(function(use)
   use 'gpanders/editorconfig.nvim'
   use 'andweeb/presence.nvim'
   use 'b0o/SchemaStore.nvim'
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
 end)
