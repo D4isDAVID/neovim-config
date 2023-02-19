@@ -28,6 +28,8 @@ return require('packer').startup(function(use)
 
     use 'tpope/vim-sleuth'
 
+    use 'andweeb/presence.nvim'
+
     use {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v1.x',
