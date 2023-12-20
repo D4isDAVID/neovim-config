@@ -9,7 +9,6 @@ require 'nvim-treesitter.configs'.setup {
     'rust',
     'lua',
     'vim',
-    'help'
   },
 
   sync_install = false,
