@@ -4,6 +4,7 @@ local lsp = require('lsp-zero').preset({
     manage_nvim_cmp = true,
     suggest_lsp_servers = false,
 })
+local format_modifications = require('lsp-format-modifications').format_modifications
 
 lsp.ensure_installed({
     'tsserver',
@@ -14,19 +15,7 @@ lsp.ensure_installed({
     'jsonls',
 })
 
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-local cmp_mappings = lsp.defaults.cmp_mappings {
-    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-    ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    ['<C-Space>'] = cmp.mapping.complete(),
-}
-
-lsp.setup_nvim_cmp({
-    mapping = cmp_mappings
-})
-
+lsp.setup_nvim_cmp()
 lsp.nvim_workspace()
 
 local opts = { noremap = true }
@@ -35,7 +24,7 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
-lsp.on_attach(function(_, bufnr)
+lsp.on_attach(function(client, bufnr)
     local bufopts = { buffer = bufnr, remap = false }
 
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
@@ -48,6 +37,15 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
     vim.keymap.set('n', '<leader>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+    vim.api.nvim_buf_create_user_command(
+        bufnr,
+        "FormatModifications",
+        function()
+            format_modifications(client, bufnr)
+        end,
+        {}
+    )
 end)
 
 lsp.setup()
@@ -55,3 +53,7 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+vim.g['prettier#autoformat'] = 1
+vim.g['prettier#autoformat_require_pragma'] = 0
+vim.g['prettier#autoformat_config_present'] = 1

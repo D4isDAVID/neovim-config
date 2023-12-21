@@ -47,6 +47,13 @@ return require('packer').startup(function(use)
             -- Snippets
             { 'L3MON4D3/LuaSnip' }, -- Required
             { 'rafamadriz/friendly-snippets' },
+
+            -- Formatting
+            { 'joechrisellis/lsp-format-modifications.nvim' },
+            {
+                'prettier/vim-prettier',
+                run = 'yarn install --frozen-lockfile --production',
+            },
         }
     }
 end)
