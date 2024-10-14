@@ -7,7 +7,7 @@ local lsp = require('lsp-zero').preset({
 local format_modifications = require('lsp-format-modifications').format_modifications
 
 lsp.ensure_installed({
-    'tsserver',
+    'ts_ls',
     'eslint',
     'lua_ls',
     'pyright',
