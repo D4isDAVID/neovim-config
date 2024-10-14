@@ -13,6 +13,7 @@ lsp.ensure_installed({
     'pyright',
     'rust_analyzer',
     'jsonls',
+    'gopls',
 })
 
 lsp.setup_nvim_cmp()
